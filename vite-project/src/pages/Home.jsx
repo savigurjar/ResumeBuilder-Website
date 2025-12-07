@@ -1,9 +1,14 @@
 import React from 'react'
+import Banner from '../components/home/Banner'
+import Hero from '../components/home/Hero'
+import Feature from '../components/home/Features'
 
 function Home() {
   return (
     <div>
-      <h1>Home PAge</h1>
+      <Banner/>
+      <Hero/>
+      <Feature/>
     </div>
   )
 }
