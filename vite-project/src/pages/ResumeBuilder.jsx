@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router'
 import { dummyResumeData } from '../assets/assets'
-import { ArrowLeftIcon } from 'lucide-react'
+import { ArrowLeftIcon, Briefcase, ChevronLeft, ChevronRight, FileText, FolderIcon, GraduationCap, Sparkle, Sparkles, SparklesIcon, User } from 'lucide-react'
 
 
 function ResumeBuilder() {
@@ -30,6 +30,20 @@ function ResumeBuilder() {
     }
   }
 
+  const [activeSectionIndex, setActiveSectionIndex] = useState(0)
+  const [removeBackground, setRemoveBackground] = useState(false);
+
+  const sections = [
+    { id: "personal", name: "Personal Info", icon: User },
+    { id: "summary", name: "Summary", icon: FileText },
+    { id: "experience", name: "Experience", icon: Briefcase },
+    { id: "education", name: "Education", icon: GraduationCap },
+    { id: "projects", name: "Projects", icon: FolderIcon },
+    { id: "skills", name: "Skills", icon: Sparkles },
+  ]
+
+  const activeSection = sections[activeSectionIndex]
+
   useEffect(() => {
     loadExistingResume()
   }, [])
@@ -41,6 +55,80 @@ function ResumeBuilder() {
           <ArrowLeftIcon className='size-4' /> Back to Dashboard
         </Link>
       </div>
+
+
+      <div className="max-w-7xl mx-auto px-4 pb-8">
+        <div className="grid lg:grid-cols-12 gap-8">
+          {/* left panel = form */}
+          <div className="relative lg:col-span-5 rounded-lg overflow-hidden">
+            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 pt-1">
+              {/* progress bar */}
+              <hr className="absolute top-0 left-0 right-0 border-2 border-gray-200" />
+
+              <hr
+                className="absolute top-0 left-0 h-1 bg-gradient-to-r from-green-500 to-green-600 border-none transition-all duration-500"
+                style={{
+                  width: `${sections.length > 1
+                      ? (activeSectionIndex * 100) / (sections.length - 1)
+                      : 0
+                    }%`,
+                }}
+              />
+
+              {/* section navigation */}
+              <div className="flex justify-between items-center mb-6 border-b border-gray-300 py-1">
+
+
+                <div className="flex items-center">
+                  {activeSectionIndex !== 0 && (
+                    <button
+                      onClick={() =>
+                        setActiveSectionIndex((prev) => Math.max(prev - 1, 0))
+                      }
+                      className="flex items-center gap-1 p-3 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50 transition-all"
+                    >
+                      <ChevronLeft size={16} />
+                      Previous
+                    </button>
+                  )}
+
+                  <button
+                    onClick={() =>
+                      setActiveSectionIndex((prev) =>
+                        Math.min(prev + 1, sections.length - 1)
+                      )
+                    }
+                    disabled={activeSectionIndex === sections.length - 1}
+                    className={`flex items-center gap-1 p-3 rounded-lg text-sm font-medium transition-all
+                ${activeSectionIndex === sections.length - 1
+                        ? 'opacity-50 cursor-not-allowed'
+                        : 'text-gray-600 hover:bg-gray-50'
+                      }`}
+                  >
+                    Next
+                    <ChevronRight size={16} />
+                  </button>
+                </div>
+              </div>
+
+              {/* form content */}
+              <div className='space-y-6'>
+                {
+                  activeSection.id === 'personal' && (
+                    <div></div>
+                  )
+                }
+
+              </div>
+
+            </div>
+          </div>
+
+          {/* right panel = preview */}
+          <div />
+        </div>
+      </div>
+
     </div>
   )
 }
