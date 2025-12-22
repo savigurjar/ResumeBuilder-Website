@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router'
 import { dummyResumeData } from '../assets/assets'
 import { ArrowLeftIcon, Briefcase, ChevronLeft, ChevronRight, FileText, FolderIcon, GraduationCap, Sparkle, Sparkles, SparklesIcon, User } from 'lucide-react'
+import PersonalInfoForm from '../components/PersonalInfoForm'
 
 
 function ResumeBuilder() {
@@ -115,7 +116,7 @@ function ResumeBuilder() {
               <div className='space-y-6'>
                 {
                   activeSection.id === 'personal' && (
-                    <div></div>
+                    <PersonalInfoForm data={resumeData.personal_info} onChange={(data)=>setResumeData(prev=>({...prev,personal_info:data}))} removeBackground={removeBackground} setRemoveBackground={setRemoveBackground}/>
                   )
                 }
 
