@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import ResumePreview from "../components/ResumePreview"
 import { useParams, Link } from 'react-router'
 import { dummyResumeData } from '../assets/assets'
 import { ArrowLeftIcon, Briefcase, ChevronLeft, ChevronRight, FileText, FolderIcon, GraduationCap, Sparkle, Sparkles, SparklesIcon, User } from 'lucide-react'
@@ -70,8 +71,8 @@ function ResumeBuilder() {
                 className="absolute top-0 left-0 h-1 bg-gradient-to-r from-green-500 to-green-600 border-none transition-all duration-500"
                 style={{
                   width: `${sections.length > 1
-                      ? (activeSectionIndex * 100) / (sections.length - 1)
-                      : 0
+                    ? (activeSectionIndex * 100) / (sections.length - 1)
+                    : 0
                     }%`,
                 }}
               />
@@ -116,7 +117,7 @@ function ResumeBuilder() {
               <div className='space-y-6'>
                 {
                   activeSection.id === 'personal' && (
-                    <PersonalInfoForm data={resumeData.personal_info} onChange={(data)=>setResumeData(prev=>({...prev,personal_info:data}))} removeBackground={removeBackground} setRemoveBackground={setRemoveBackground}/>
+                    <PersonalInfoForm data={resumeData.personal_info} onChange={(data) => setResumeData(prev => ({ ...prev, personal_info: data }))} removeBackground={removeBackground} setRemoveBackground={setRemoveBackground} />
                   )
                 }
 
@@ -126,7 +127,16 @@ function ResumeBuilder() {
           </div>
 
           {/* right panel = preview */}
-          <div />
+
+          <div className='lg:col-span-7 max-lg:mt-6'>
+            <div>
+              {/* buttons */}
+
+            </div>
+            {/* resume preview */}
+            <ResumePreview data={resumeData} template={resumeData.template} accentColor={resumeData.accent_color} />
+          </div>
+
         </div>
       </div>
 
