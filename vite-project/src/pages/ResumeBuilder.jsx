@@ -4,6 +4,7 @@ import { useParams, Link } from 'react-router'
 import { dummyResumeData } from '../assets/assets'
 import { ArrowLeftIcon, Briefcase, ChevronLeft, ChevronRight, FileText, FolderIcon, GraduationCap, Sparkle, Sparkles, SparklesIcon, User } from 'lucide-react'
 import PersonalInfoForm from '../components/PersonalInfoForm'
+import TemplateSelector from '../components/TemplateSelector'
 
 
 function ResumeBuilder() {
@@ -79,7 +80,11 @@ function ResumeBuilder() {
 
               {/* section navigation */}
               <div className="flex justify-between items-center mb-6 border-b border-gray-300 py-1">
-
+                <div className='flex justify-between items-center mb-6 border-b border-gray-300 py-1'>
+                  {/* change template  */}
+                  <TemplateSelector selectedTemplate={resumeData.template} onChange={(template)=>setResumeData(prev => ({...prev,template}))} />
+                  {/* color picker */}
+                </div>
 
                 <div className="flex items-center">
                   {activeSectionIndex !== 0 && (
