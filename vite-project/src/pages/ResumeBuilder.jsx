@@ -17,6 +17,7 @@ import PersonalInfoForm from "../components/PersonalInfoForm";
 import TemplateSelector from "../components/TemplateSelector";
 import ColorPicker from "../components/ColorPicker";
 import { dummyResumeData } from "../assets/assets";
+import ProfessionalSummaryForm from "../components/ProfessionalSummaryForm";
 
 function ResumeBuilder() {
   const { resumeId } = useParams();
@@ -80,12 +81,11 @@ function ResumeBuilder() {
               <div
                 className="absolute top-0 left-0 h-1 bg-gradient-to-r from-green-500 to-green-600 transition-all duration-500"
                 style={{
-                  width: `${
-                    sections.length > 1
+                  width: `${sections.length > 1
                       ? (activeSectionIndex * 100) /
-                        (sections.length - 1)
+                      (sections.length - 1)
                       : 0
-                  }%`,
+                    }%`,
                 }}
               />
 
@@ -130,11 +130,10 @@ function ResumeBuilder() {
                       )
                     }
                     disabled={activeSectionIndex === sections.length - 1}
-                    className={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm ${
-                      activeSectionIndex === sections.length - 1
+                    className={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm ${activeSectionIndex === sections.length - 1
                         ? "opacity-50 cursor-not-allowed"
                         : "text-gray-600 hover:bg-gray-50"
-                    }`}
+                      }`}
                   >
                     Next
                     <ChevronRight size={16} />
@@ -157,6 +156,18 @@ function ResumeBuilder() {
                     setRemoveBackground={setRemoveBackground}
                   />
                 )}
+                {activeSection.id === 'summary' && (
+                  <ProfessionalSummaryForm
+                    data={resumeData.professional_summary}
+                    onChange={(data) =>
+                      setResumeData((prev) => ({
+                        ...prev,
+                        professional_summary: data,
+                      }))
+                    }
+                  />
+                )}
+
 
                 {/* other sections can be added here */}
               </div>
